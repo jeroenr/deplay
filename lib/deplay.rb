@@ -2,14 +2,14 @@ Capistrano::Configuration.instance.load do
   namespace :deplay do
 
    set :app_name, 'my_app'
-   set :log_path, '/var/log'
+   set :log_dir, '/var/log'
    set :prod_conf, 'prod.conf' 
    set :deploy_to, '/var/lib/my_app'
    set :project_home, '.'
 
    task :setup do
       run "mkdir -p #{deploy_to}"
-      put "#!/bin/bash\nnohup bash -c \"cd #{deploy_to} && target/start $* &>> #{log_path}/#{app_name}.log 2>&1\" &> /dev/null &", "#{deploy_to}/start.sh", :mode => '755', :via => :scp
+      put "#!/bin/bash\nnohup bash -c \"cd #{deploy_to} && target/start $* &>> #{log_dir}/#{app_name}.log 2>&1\" &> /dev/null &", "#{deploy_to}/start.sh", :mode => '755', :via => :scp
       put "#!/bin/bash\npid=`cat RUNNING_PID 2> /dev/null`\nif [ \"$pid\" == \"\" ]; then echo '#{app_name} is not running'; exit 0; fi\necho 'Stopping #{app_name}...'\nkill -SIGTERM $pid", "#{deploy_to}/stop.sh", :mode => '755', :via => :scp
    end
 
