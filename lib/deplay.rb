@@ -9,7 +9,7 @@ Capistrano::Configuration.instance.load do
    deploy_to="#{install_path}/#{app_name}"
    
    START_SCRIPT="#!/bin/bash\nnohup bash -c 'cd #{deploy_to} && target/start $* &>> #{log_path}/#{app_name}.log 2>&1' &> /dev/null &"
-   STOP_SCRIPT="#!/bin/bash\npid=`cat RUNNING_PID 2> /dev/null`\nif [ "$pid" == "" ]; then echo '#{app_name} is not running'; exit 0; fi\necho 'Stopping #{app_name}...'\nkill -SIGTERM $pid"
+   STOP_SCRIPT="#!/bin/bash\npid=`cat RUNNING_PID 2> /dev/null`\nif [ $pid == '' ]; then echo '#{app_name} is not running'; exit 0; fi\necho 'Stopping #{app_name}...'\nkill -SIGTERM $pid"
 
 
    task :setup do
