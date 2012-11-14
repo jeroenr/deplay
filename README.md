@@ -1,56 +1,64 @@
 [![endorse](http://api.coderwall.com/jeroenr/endorsecount.png)](http://coderwall.com/jeroenr)
 
-# debloy
+# deplay
 
-debloy is a capistrano plugin to facilitate the deployment of debian packages (inspired by supply_drop). It works by simply copying (using rsync, or scp) your debian packages to your servers and installing them through the package manager
+deplay is a capistrano plugin to facilitate the deployment of Play! applications (inspired by supply_drop). It works by packaging your Play! application and copying (using rsync, or scp) it to your servers
 
 ### Installation
 
-    gem install debloy
+    gem install deplay
 
 or with Bundler
 
-    gem 'debloy'
+    gem 'deplay'
 
 ### Tasks
 
-    cap debloy:bootstrap
+    cap deplay:setup
 
-This sets up the environment for dpkg or apt deployment, depending on your configuration.
+This sets up the environment for Play! deployment, depending on your configuration.
 
-    cap debloy
+    cap deplay:deploy_dev
 
-This deploys the debian packages on the target servers.
+This deploys the Play! application on the target servers using development configuration.
 
-    cap debloy:teardown
+    cap deplay:deploy_prod
 
-Cleans up the environment.
+This deploys the Play! application on the target servers using production configuration.
+
+    cap deplay:stop
+
+Stops the Play! application.
+
+    cap deplay:start
+
+Starts the Play! application.
 
 ### Configuration
 
 At the top of your deploy.rb
 
     require 'rubygems'
-    require 'debloy'
+    require 'deplay'
 
 then optionally set some variables
 
-    set :debian_source, '.'
+    set :app_name, 'my_app'
 
-the directory containing your debian packages that will be rsynced to the servers.
+the name of your app. Used for the log file and messages
 
-  	set :debian_target, '/tmp'
+  	set :log_dir, '/var/log'
 
-the temp directory on the target machine to hold the packages before installing.
+the log directory on the target machine.
 
- 	set :debian_package_manager, 'dpkg'
+ 	set :prod_conf, 'prod.conf'
 
-the debian package manager to use (one of [dpkg, apt]).
+the production configuration file to use.
 
-  	set :debian_stream_log, false
+  	set :deploy_to, '/var/lib/my_app'
 
-determines whether to stream the command output.
+the path to deploy to.
 	
-	set :debian_filter, '*'
+	set :project_home, '.'
 
-a glob syntax filter to determine which packages to deploy. By default all will be deployed.
+the location of your Play! project (local path).
