@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Deplay : Deploy Play! applications with capistrano" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Deplay</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/jeroenr/deplay">View on GitHub</a>
+
+          <h1 id="project_title">Deplay</h1>
+          <h2 id="project_tagline">Deploy Play! applications with capistrano</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/jeroenr/deplay/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/jeroenr/deplay/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>deplay</h1>
+
+<p>deplay is a capistrano plugin to facilitate the deployment of Play! applications (inspired by supply_drop). It works by packaging your Play! application and copying (using rsync, or scp) it to your servers</p>
+
+<h3>Installation</h3>
+
+<pre><code>gem install deplay
+</code></pre>
+
+<p>or with Bundler</p>
+
+<pre><code>gem 'deplay'
+</code></pre>
+
+<h3>Tasks</h3>
+
+<pre><code>cap deplay:setup
+</code></pre>
+
+<p>This sets up the environment for Play! deployment, depending on your configuration.</p>
+
+<pre><code>cap deplay:deploy_dev
+</code></pre>
+
+<p>This deploys the Play! application on the target servers using development configuration.</p>
+
+<pre><code>cap deplay:deploy_prod
+</code></pre>
+
+<p>This deploys the Play! application on the target servers using production configuration.</p>
+
+<pre><code>cap deplay:stop
+</code></pre>
+
+<p>Stops the Play! application.</p>
+
+<pre><code>cap deplay:start
+</code></pre>
+
+<p>Starts the Play! application.</p>
+
+<h3>Configuration</h3>
+
+<p>At the top of your deploy.rb</p>
+
+<pre><code>require 'rubygems'
+require 'deplay'
+</code></pre>
+
+<p>then optionally set some variables</p>
+
+<pre><code>set :app_name, 'my_app'
+</code></pre>
+
+<p>the name of your app. Used for the log file and messages</p>
+
+<pre><code>set :log_dir, '/var/log'
+</code></pre>
+
+<p>the log directory on the target machine.</p>
+
+<pre><code>set :prod_conf, 'prod.conf'
+</code></pre>
+
+<p>the production configuration file to use.</p>
+
+<pre><code>set :deploy_to, '/var/lib/my_app'
+</code></pre>
+
+<p>the path to deploy to.</p>
+
+<pre><code>set :project_home, '.'
+</code></pre>
+
+<p>the location of your Play! project (local path).</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Deplay maintained by <a href="https://github.com/jeroenr">jeroenr</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
