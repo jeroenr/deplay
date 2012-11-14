@@ -1,0 +1,6 @@
+*.gem
+*.lock
+*.swp
+*.orig
+.idea
+*.iml
