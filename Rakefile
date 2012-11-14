@@ -6,7 +6,7 @@ end
 namespace :gem do
   desc "build the gem"
   task :build => :clean do
-    sh "gem build debloy.gemspec"
+    sh "gem build deplay.gemspec"
   end
 
   desc "push the gem"
