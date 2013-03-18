@@ -61,6 +61,7 @@ Capistrano::Configuration.instance.load do
    end
 
    task :copy_app_files do
+     run  "rm -fr #{deploy_to}/target"
      upload "#{project_home}/target", deploy_to, :via => :scp, :recursive => true
    end
   end
